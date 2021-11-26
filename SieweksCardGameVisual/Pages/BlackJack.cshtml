@@ -1,0 +1,21 @@
+﻿@page
+@model SieweksCardGameVisual.Pages.BlackJackModel
+@{
+
+}
+<p>
+
+    @foreach (var item in Classes.Deck.deck)
+    {
+        try
+        {
+        <img src="@item.imagepath" width="125" height="182" />
+        }
+        catch { }
+    }
+
+</p>
+<h1> My Hand</h1>
+<form method="post">
+<input type="submit" class="btn-dark" value="hit" />
+</form>

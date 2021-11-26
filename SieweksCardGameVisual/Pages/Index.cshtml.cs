@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using SieweksCardGameVisual.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,15 @@ namespace SieweksCardGameVisual.Pages
         {
             _logger = logger;
         }
-
+        Deck deck = new Deck();
         public void OnGet()
         {
 
+        }
+
+        public IActionResult OnPost()
+        {
+            return RedirectToPage("BlackJack");
         }
     }
 }
