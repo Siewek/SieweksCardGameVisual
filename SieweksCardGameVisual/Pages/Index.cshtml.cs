@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using SieweksCardGameVisual.Classes;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,11 @@ namespace SieweksCardGameVisual.Pages
         {
             _logger = logger;
         }
+        Player player1;
+        List<Cards> hand1;
+        Player player2;
+        List<Cards> hand2;
+        Deck deck = new Deck();
         public void OnGet()
         {
             HttpContext.Session.Clear();
@@ -24,6 +31,34 @@ namespace SieweksCardGameVisual.Pages
 
         public IActionResult OnPost()
         {
+            player1 = new Player();
+            hand1 = new List<Cards>();
+            player2 = new Player();
+            hand2 = new List<Cards>();
+            deck.builddeck();
+
+
+            deck.getnextcard();
+            player1.hit();
+            hand1.Add(player1.GetCard());
+
+
+            deck.getnextcard();
+            player2.hit();
+            hand2.Add(player2.GetCard());
+            if (ModelState.IsValid)
+            {
+                HttpContext.Session.SetString("Hand1Address",
+                JsonConvert.SerializeObject(hand1));
+                HttpContext.Session.SetString("Player1Address",
+                JsonConvert.SerializeObject(player1));
+                HttpContext.Session.SetString("Hand2Address",
+                JsonConvert.SerializeObject(hand2));
+                HttpContext.Session.SetString("Player2Address",
+                JsonConvert.SerializeObject(player2));
+                HttpContext.Session.SetString("deckAddress",
+                JsonConvert.SerializeObject(deck));
+            }
             return RedirectToPage("BlackJack");
         }
     }

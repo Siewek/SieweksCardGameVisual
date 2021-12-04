@@ -9,7 +9,7 @@
     {
         try
         {
-        <img src="@item.imagepath" width="125" height="182" />
+            <img src="@item.imagepath" width="125" height="182" />
         }
         catch { }
     }
@@ -27,6 +27,23 @@
         catch { }
     }
 </p1>
+
+<h2>Value</h2>
+<p1>@Model.player1.value</p1>
+<h1>Opponents hand</h1>
+<p1>
+    @foreach (var item in Model.hand2)
+    {
+        try
+        {
+            <img src="@item.imagepath" width="125" height="182" />
+        }
+        catch { }
+    }
+</p1>
+
+<h2>Value</h2>
+<p1>@Model.player2.value</p1>
 <form method="post">
-<input type="submit" class="btn-dark" value="hit" />
+    <input type="submit" class="btn-dark" value="hit" />
 </form>
