@@ -3,9 +3,9 @@
 @{
 }
 
-<h2>@Model.Message</h2>
-<h3> My Hand</h3>
-<p1>
+<h2 class="textcolor">@Model.Message</h2>
+<h3 class="textcolor"> My Hand</h3>
+<p1 class="textcolor">
     @foreach (var item in Model.hand1)
     {
         try
@@ -15,8 +15,8 @@
         catch { }
     }
 </p1>
-<h3>Opponents hand</h3>
-<p1>
+<h3 class="textcolor">Opponents hand</h3>
+<p1 class="textcolor">
     @foreach (var item in Model.hand2)
     {
         try

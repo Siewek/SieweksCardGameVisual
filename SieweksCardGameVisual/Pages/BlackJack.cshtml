@@ -3,8 +3,8 @@
 @{
 
 }
-<h1> My Hand</h1>
-<p1>
+<h1 class="textcolor"> My Hand</h1>
+<p1 class="textcolor">
     @foreach (var item in Model.hand1)
     {
         try
@@ -15,10 +15,10 @@
     }
 </p1>
 
-<h2>Value</h2>
-<p1>@Model.player1.value</p1>
-<h1>Opponents hand</h1>
-<p1>
+<h2 class="textcolor">Value</h2>
+<p1 class="textcolor">@Model.player1.value</p1>
+<h1 class="textcolor">Opponent's hand</h1>
+<p1 class="textcolor">
     @foreach (var item in Model.hand2)
     {
         try
@@ -29,8 +29,8 @@
     }
 </p1>
 
-<h2>Value</h2>
-<p1>@Model.player2.value</p1>
+<h2 class="textcolor">Value</h2>
+<p1 class="textcolor">@Model.player2.value</p1>
 <form method="post">
     <input type="text" hidden value="hit" name="action" />
     <input class="btn-dark" value="hit"  type="submit" />
