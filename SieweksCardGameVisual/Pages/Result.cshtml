@@ -1,0 +1,28 @@
+﻿@page
+@model SieweksCardGameVisual.Pages.ResultModel
+@{
+}
+
+<h2>@Model.Message</h2>
+<h3> My Hand</h3>
+<p1>
+    @foreach (var item in Model.hand1)
+    {
+        try
+        {
+            <img src="@item.imagepath" width="125" height="182" />
+        }
+        catch { }
+    }
+</p1>
+<h3>Opponents hand</h3>
+<p1>
+    @foreach (var item in Model.hand2)
+    {
+        try
+        {
+            <img src="@item.imagepath" width="125" height="182" />
+        }
+        catch { }
+    }
+</p1>

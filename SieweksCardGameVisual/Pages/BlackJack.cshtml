@@ -3,19 +3,6 @@
 @{
 
 }
-<p>
-
-    @foreach (var item in Classes.Deck.deck)
-    {
-        try
-        {
-            <img src="@item.imagepath" width="125" height="182" />
-        }
-        catch { }
-    }
-
-</p>
-
 <h1> My Hand</h1>
 <p1>
     @foreach (var item in Model.hand1)
@@ -45,5 +32,11 @@
 <h2>Value</h2>
 <p1>@Model.player2.value</p1>
 <form method="post">
-    <input type="submit" class="btn-dark" value="hit" />
+    <input type="text" hidden value="hit" name="action" />
+    <input class="btn-dark" value="hit"  type="submit" />
+</form>
+
+<form method="post">
+    <input type="text" hidden value="fold" name="action" />
+    <input class="btn-dark" value="stand" type="submit" />
 </form>

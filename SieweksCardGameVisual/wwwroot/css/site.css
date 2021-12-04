@@ -72,3 +72,9 @@ body {
 .font{
     font-family: MS Gothic;
 }
+.background {
+    background-image: url("pokertable.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}

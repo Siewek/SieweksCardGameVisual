@@ -24,6 +24,7 @@ namespace SieweksCardGameVisual.Pages
         Player player2;
         List<Cards> hand2;
         Deck deck = new Deck();
+        string opfirstcard;
         public void OnGet()
         {
             HttpContext.Session.Clear();
@@ -46,6 +47,8 @@ namespace SieweksCardGameVisual.Pages
             deck.getnextcard();
             player2.hit();
             hand2.Add(player2.GetCard());
+            opfirstcard = hand2.ElementAt(0).imagepath;
+            hand2.ElementAt(0).imagepath = "/images/red_joker.png";
             if (ModelState.IsValid)
             {
                 HttpContext.Session.SetString("Hand1Address",
@@ -58,6 +61,8 @@ namespace SieweksCardGameVisual.Pages
                 JsonConvert.SerializeObject(player2));
                 HttpContext.Session.SetString("deckAddress",
                 JsonConvert.SerializeObject(deck));
+                HttpContext.Session.SetString("opponentshiddencard",
+                JsonConvert.SerializeObject(opfirstcard));
             }
             return RedirectToPage("BlackJack");
         }
