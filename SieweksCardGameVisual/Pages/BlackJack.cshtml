@@ -3,7 +3,9 @@
 @{
 
 }
-<h1 class="textcolor"> My Hand</h1>
+<div class="movedown">
+<h1 class="textcolor"> @Model.name's Hand</h1>
+</div>
 <p1 class="textcolor">
     @foreach (var item in Model.hand1)
     {
@@ -15,8 +17,8 @@
     }
 </p1>
 
-<h2 class="textcolor">Value</h2>
 <p1 class="textcolor">@Model.player1.value</p1>
+<div class="movedown"></div>
 <h1 class="textcolor">Opponent's hand</h1>
 <p1 class="textcolor">
     @foreach (var item in Model.hand2)
@@ -28,15 +30,34 @@
         catch { }
     }
 </p1>
-
-<h2 class="textcolor">Value</h2>
-<p1 class="textcolor">@Model.player2.value</p1>
-<form method="post">
-    <input type="text" hidden value="hit" name="action" />
-    <input class="btn-dark" value="hit"  type="submit" />
-</form>
-
-<form method="post">
-    <input type="text" hidden value="fold" name="action" />
-    <input class="btn-dark" value="stand" type="submit" />
-</form>
+<div class="marginbottom">
+    <form method="post">
+        <input type="text" hidden value="hit" name="action" />
+        <input class="btn-dark" value="Hit" type="submit" />
+    </form>
+</div>
+<div class="marginbottom">
+    <form method="post">
+        <input type="text" hidden value="fold" name="action" />
+        <input class="btn-dark" value="Stand" type="submit" />
+    </form>
+</div>
+<div class="marginbottom">
+    <form method="post">
+        <input type="text" hidden value="peek" name="action" />
+        <input class="btn-dark" value="Show Opponent' Card" type="submit" />
+    </form>
+</div>
+<div class="marginbottom">
+    <p class="textcolor">
+        @try
+        {@Model.cheatmessage}
+    catch { }
+    </p>
+</div>
+            <div class="snaptobottomleft">
+                <form method="post">
+                    <input type="text" hidden value="back" name="action" />
+                    <input class="btn-dark" value="Back to Menu" type="submit" />
+                </form>
+            </div>

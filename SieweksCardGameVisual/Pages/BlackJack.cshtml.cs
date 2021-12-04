@@ -20,7 +20,10 @@ namespace SieweksCardGameVisual.Pages
         public Player player2;
         public List<Cards> hand2;
         string opfirstcard;
+        public string name;
         Random rnd = new Random();
+        public int dc, tries,whostarts;
+        public string cheatmessage;
         public void serializeMyShit()
         {
             HttpContext.Session.SetString("Hand1Address",
@@ -35,6 +38,12 @@ namespace SieweksCardGameVisual.Pages
             JsonConvert.SerializeObject(deck));
             HttpContext.Session.SetString("opponentshiddencard",
              JsonConvert.SerializeObject(opfirstcard));
+            HttpContext.Session.SetString("diffuculty",
+              JsonConvert.SerializeObject(dc));
+            HttpContext.Session.SetString("tries",
+           JsonConvert.SerializeObject(tries));
+            HttpContext.Session.SetString("name",
+              JsonConvert.SerializeObject(name));
         }
 
         public void Player2AI()
@@ -54,6 +63,9 @@ namespace SieweksCardGameVisual.Pages
             var PlayerAddress2 = HttpContext.Session.GetString("Player2Address");
             var DeckAddress = HttpContext.Session.GetString("deckAddress");
             var opcardAddress = HttpContext.Session.GetString("opponentshiddencard");
+            var dcAddress = HttpContext.Session.GetString("diffuculty");
+            var triesAddress = HttpContext.Session.GetString("tries");
+            var nameAddress = HttpContext.Session.GetString("name");
 
             deck = JsonConvert.DeserializeObject<Deck>(DeckAddress);
             hand1 = JsonConvert.DeserializeObject<List<Cards>>(SessionAddress);
@@ -61,7 +73,9 @@ namespace SieweksCardGameVisual.Pages
             hand2 = JsonConvert.DeserializeObject<List<Cards>>(SessionAddress2);
             player2 = JsonConvert.DeserializeObject<Player>(PlayerAddress2);
             opfirstcard = JsonConvert.DeserializeObject<string>(opcardAddress);
-      
+            dc = JsonConvert.DeserializeObject<int>(dcAddress);
+            tries = JsonConvert.DeserializeObject<int>(triesAddress);
+            name = JsonConvert.DeserializeObject<string>(nameAddress);
         }
         public IActionResult OnPost(string action)
         {
@@ -103,6 +117,36 @@ namespace SieweksCardGameVisual.Pages
                         serializeMyShit();
                     }
                     return RedirectToPage("Result");
+            }
+            if(action == "peek")
+            {
+                int roll;
+                roll = rnd.Next(0, 20);
+                if(roll >=dc || tries == -1)
+                {
+                    hand2.ElementAt(0).imagepath = opfirstcard;
+                    cheatmessage = "Success, opponents card has been revealed";                   
+                    if(tries == -1)
+                    {
+                        cheatmessage = "You already succeeded in this action this round";
+                    }
+                    tries = -1;
+                }
+                else if(roll <dc)
+                {
+                    tries++;
+                    dc++;
+                    cheatmessage = "Opponent: Hey, what do you think you're doing? Don't try that again";
+                }
+                if(tries ==2)
+                {
+                    serializeMyShit();
+                    return RedirectToPage("Result");
+                }
+            }
+            if(action == "back")
+            {
+                return RedirectToPage("Index");
             }
             if (ModelState.IsValid)
             {

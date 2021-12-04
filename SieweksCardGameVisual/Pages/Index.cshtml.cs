@@ -25,17 +25,22 @@ namespace SieweksCardGameVisual.Pages
         List<Cards> hand2;
         Deck deck = new Deck();
         string opfirstcard;
+        public int dc, tries, whostarts;
         public void OnGet()
         {
             HttpContext.Session.Clear();
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(string name)
         {
+            Random rnd = new Random();
+            whostarts = rnd.Next(2);
             player1 = new Player();
             hand1 = new List<Cards>();
             player2 = new Player();
             hand2 = new List<Cards>();
+            dc = 10;
+            tries = 0;
             deck.builddeck();
 
 
@@ -48,6 +53,12 @@ namespace SieweksCardGameVisual.Pages
             player2.hit();
             hand2.Add(player2.GetCard());
             opfirstcard = hand2.ElementAt(0).imagepath;
+            if(whostarts == 1)
+            {
+                deck.getnextcard();
+                player2.hit();
+                hand2.Add(player2.GetCard());
+            }
             hand2.ElementAt(0).imagepath = "/images/red_joker.png";
             if (ModelState.IsValid)
             {
@@ -63,6 +74,12 @@ namespace SieweksCardGameVisual.Pages
                 JsonConvert.SerializeObject(deck));
                 HttpContext.Session.SetString("opponentshiddencard",
                 JsonConvert.SerializeObject(opfirstcard));
+                HttpContext.Session.SetString("diffuculty",
+               JsonConvert.SerializeObject(dc));
+                HttpContext.Session.SetString("tries",
+               JsonConvert.SerializeObject(tries));
+                HttpContext.Session.SetString("name",
+               JsonConvert.SerializeObject(name));
             }
             return RedirectToPage("BlackJack");
         }

@@ -95,3 +95,25 @@ body {
     right: 0px;
     bottom: 0px;
 }
+
+.snaptobottomleft {
+    columns:1 auto;
+    overflow:hidden;
+    position:absolute;
+    left: 10px;
+    bottom: 10px;
+}
+
+.movedown{
+    padding-top:40px;
+}
+.marginbottom{
+    padding-top:20px;
+    padding-bottom:20px;
+}
+.snaptoleft {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    left: 10px;
+}

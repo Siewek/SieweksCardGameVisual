@@ -4,13 +4,30 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-   <h1 class="textcolor">Siewek's Card Game</h1>
+<div class="movedown">
+    <div class="text-center" >
+       <h1 class="textcolor">Siewek's Card Game</h1>
+    </div>
+</div>
+    <form method="post" class="text-center">
+        <input type="text" name="name" placeholder="Input Your Name" value="Player"/>
+        <input type="submit" class="btn-dark" value="Start Game"/>
+    </form>
+    <p class="titlecards">
+        <img src ="~/css/cards.png" />
+    </p>
+
+<div class="snaptoleft">
+    <p class="textcolor">Loose adaptation of:</p>
+    <img src="~/css/tekstpoker.png"/>
 </div>
 
-<form method="post" class="text-center">
-    <input type="submit" class="btn-dark" value="Start Game"/>
-</form>
-<p class="titlecards">
-    <img src ="~/css/cards.png" />
-</p>
+    <div class="snaptobottomleft">
+        <p class="textcolor">
+            Each player starts with one card unknown to the other player. The goal of the game is to get the sum of your cards as close to 21 as possible   with Jack, Queens and Kings counting as 10s and Ace counting as
+        </p>
+        <p class="textcolor">
+            either 1 or 11, depending on what would bring you closer to the desired 21.
+            If any player's card sum exceeds 21, they lose automatically.
+        </p>
+    </div>

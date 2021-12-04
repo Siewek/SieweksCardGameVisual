@@ -19,6 +19,7 @@ namespace SieweksCardGameVisual.Pages
         public List<Cards> hand2;
         public string Message;
         string opfirstcard;
+        public int dc, tries;
         public void OnGet()
         {
             var SessionAddress = HttpContext.Session.GetString("Hand1Address");
@@ -27,6 +28,8 @@ namespace SieweksCardGameVisual.Pages
             var PlayerAddress2 = HttpContext.Session.GetString("Player2Address");
             var DeckAddress = HttpContext.Session.GetString("deckAddress");
             var opcardAddress = HttpContext.Session.GetString("opponentshiddencard");
+            var dcAddress = HttpContext.Session.GetString("diffuculty");
+            var triesAddress = HttpContext.Session.GetString("tries");
 
             deck = JsonConvert.DeserializeObject<Deck>(DeckAddress);
             hand1 = JsonConvert.DeserializeObject<List<Cards>>(SessionAddress);
@@ -34,9 +37,15 @@ namespace SieweksCardGameVisual.Pages
             hand2 = JsonConvert.DeserializeObject<List<Cards>>(SessionAddress2);
             player2 = JsonConvert.DeserializeObject<Player>(PlayerAddress2);
             opfirstcard = JsonConvert.DeserializeObject<string>(opcardAddress);
+            dc = JsonConvert.DeserializeObject<int>(dcAddress);
+            tries = JsonConvert.DeserializeObject<int>(triesAddress);
 
             hand2.ElementAt(0).imagepath = opfirstcard;
-            if (player1.value > player2.value && player1.value <= 21 || player2.value > 21)
+            if(tries == 2)
+            {
+                Message = "You got caught cheating and You Lose";
+            }
+            else if (player1.value > player2.value && player1.value <= 21 || player2.value > 21)
             {
                 Message = "You Win";
             }
@@ -45,6 +54,15 @@ namespace SieweksCardGameVisual.Pages
                 Message = "You Lose";
             }
             else Message = "It's a Tie";
+        }
+        public IActionResult OnPost(string action)
+        {
+            if(action == "back")
+            {
+                return RedirectToPage("Index");
+            }
+
+            return Page();
         }
     }
 }
