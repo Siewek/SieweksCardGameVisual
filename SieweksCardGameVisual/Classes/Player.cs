@@ -9,27 +9,19 @@ namespace SieweksCardGameVisual.Classes
     {
         basic = 0, cheater = 1, righteous = 2
     }
-    class Player : Deck
+    public class Player : Deck
     {
         private Random rnd = new Random();
         public List<Cards> hand = new List<Cards>();
-        public static List<Cards> hand1 = new List<Cards>();
-        public static List<Cards> hand2 = new List<Cards>();
+        public Cards HitCard;
         private string helper;
         private int dc = 13, tries = 0;
         public int myvalue = 0;
-
-        public void hit_for_reals_this_time()
-        {
-            foreach(var item in hand)
-            {
-                hand1 = hand;
-            }
-        }
+      
         public void hit()
         {
-            hand.Add(deck[rowhelper, columnhelper]);
-
+            HitCard = new Cards();
+            // hand.Add(deck[rowhelper, columnhelper]);
             if (deck[rowhelper, columnhelper].value == 11 || deck[rowhelper, columnhelper].value == 12 || deck[rowhelper, columnhelper].value == 13)
             {
                 myvalue = myvalue + 10;
@@ -47,7 +39,12 @@ namespace SieweksCardGameVisual.Classes
             {
                 myvalue = myvalue + deck[rowhelper, columnhelper].value;
             }
+            HitCard = deck[rowhelper, columnhelper];
             deck[rowhelper, columnhelper] = null;
+        }
+        public Cards GetCard()
+        {
+            return HitCard;
         }
         public int value { get { return myvalue; } }
         public void showhand()

@@ -17,10 +17,9 @@ namespace SieweksCardGameVisual.Pages
         {
             _logger = logger;
         }
-        Deck deck = new Deck();
         public void OnGet()
         {
-
+            HttpContext.Session.Clear();
         }
 
         public IActionResult OnPost()
