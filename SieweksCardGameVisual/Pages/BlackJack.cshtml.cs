@@ -24,6 +24,7 @@ namespace SieweksCardGameVisual.Pages
         Random rnd = new Random();
         public int dc, tries,whostarts;
         public string cheatmessage;
+        int balance;
         public void serializeMyShit()
         {
             HttpContext.Session.SetString("Hand1Address",
@@ -44,6 +45,8 @@ namespace SieweksCardGameVisual.Pages
            JsonConvert.SerializeObject(tries));
             HttpContext.Session.SetString("name",
               JsonConvert.SerializeObject(name));
+            HttpContext.Session.SetString("money",
+            JsonConvert.SerializeObject(balance));
         }
 
         public void Player2AI()
@@ -66,6 +69,7 @@ namespace SieweksCardGameVisual.Pages
             var dcAddress = HttpContext.Session.GetString("diffuculty");
             var triesAddress = HttpContext.Session.GetString("tries");
             var nameAddress = HttpContext.Session.GetString("name");
+            var moneyAddress = HttpContext.Session.GetString("money");
 
             deck = JsonConvert.DeserializeObject<Deck>(DeckAddress);
             hand1 = JsonConvert.DeserializeObject<List<Cards>>(SessionAddress);
@@ -76,6 +80,7 @@ namespace SieweksCardGameVisual.Pages
             dc = JsonConvert.DeserializeObject<int>(dcAddress);
             tries = JsonConvert.DeserializeObject<int>(triesAddress);
             name = JsonConvert.DeserializeObject<string>(nameAddress);
+            balance = JsonConvert.DeserializeObject<int>(moneyAddress);
         }
         public IActionResult OnPost(string action)
         {

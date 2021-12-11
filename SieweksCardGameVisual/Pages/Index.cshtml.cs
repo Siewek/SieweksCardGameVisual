@@ -25,6 +25,7 @@ namespace SieweksCardGameVisual.Pages
         List<Cards> hand2;
         Deck deck = new Deck();
         string opfirstcard;
+        int balance;
         public int dc, tries, whostarts;
         public void OnGet()
         {
@@ -41,6 +42,7 @@ namespace SieweksCardGameVisual.Pages
             hand2 = new List<Cards>();
             dc = 10;
             tries = 0;
+            balance = 100;
             deck.builddeck();
 
 
@@ -80,6 +82,8 @@ namespace SieweksCardGameVisual.Pages
                JsonConvert.SerializeObject(tries));
                 HttpContext.Session.SetString("name",
                JsonConvert.SerializeObject(name));
+                HttpContext.Session.SetString("money",
+              JsonConvert.SerializeObject(balance));
             }
             return RedirectToPage("BlackJack");
         }
